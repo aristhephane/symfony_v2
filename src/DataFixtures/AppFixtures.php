@@ -359,6 +359,7 @@ class AppFixtures extends Fixture
             foreach ($filmData['genres'] as $genreName) {
                 if (isset($genres[$genreName])) {
                     $film->addGenre($genres[$genreName]);
+                    echo "Genre $genreName ajouté au film " . $film->getTitle() . ".\n";
                 } else {
                     throw new \Exception("Genre not found: $genreName");
                 }
