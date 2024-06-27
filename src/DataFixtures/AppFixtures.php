@@ -354,7 +354,6 @@ class AppFixtures extends Fixture
                 $filmData['studio'],
                 $filmData['actors']
             );
-            /*
             // Associer les genres au film après la création
 
             foreach ($filmData['genres'] as $genreName) {
@@ -366,7 +365,8 @@ class AppFixtures extends Fixture
             }
 
             $manager->persist($film);
-
+            echo "Film " . $film->getTitle() . " créé et persisté.\n";
+            /*
             // Film
             $items = [];
             for ($i = 0; $i < 3; $i++) {
@@ -406,5 +406,6 @@ class AppFixtures extends Fixture
     */
         }
         $manager->flush();
+        echo "Films créés et persistés.\n";
     }
 }
