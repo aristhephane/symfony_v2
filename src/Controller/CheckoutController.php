@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\CheckoutType;
 use App\Service\CheckoutService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
