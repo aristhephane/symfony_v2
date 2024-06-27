@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Account
+{% endblock %}
+
+{% block body %}
+	<h1>Mon Compte</h1>
+	<p>Bienvenue,
+		{{ user.username }}!</p>
+	<h2>Informations personnelles</h2>
+	<ul>
+		<li>Identifiants:
+			{{ user.firstName }}
+			{{ user.lastName }}</li>
+		<li>Email:
+			{{ user.email }}</li>
+	</ul>
+	<h2>Historique des Commandes</h2>
+	<ul>
+		{% for order in orders %}
+			<li>
+				<a href="{{ path('order_validation', {id: order.id}) }}">Order #{{ order.id }}</a>
+				-
+				{{ order.totalPrice }}
+				-
+				{{ order.status }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DVDRepository::class)]
 class DVD
 {
-
     public const FORMAT_BLURAY = 'Blu-ray';
     public const FORMAT_DVD = 'DVD';
     public const FORMAT_4K = '4K';
@@ -48,10 +47,6 @@ class DVD
     #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'dvd')]
     private Collection $orders;
 
-    #[ORM\ManyToOne(inversedBy: 'dvd')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Genre $genre = null;
-
     public function __construct(
         ?Film $film = null,
         ?string $format = null,
@@ -64,6 +59,8 @@ class DVD
         $this->price = $price;
         $this->stock = $stock;
         $this->poster = $poster;
+        $this->reviews = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,18 +191,6 @@ class DVD
         if ($this->orders->removeElement($order)) {
             $order->removeDvd($this);
         }
-
-        return $this;
-    }
-
-    public function getGenre(): ?Genre
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(?Genre $genre): static
-    {
-        $this->genre = $genre;
 
         return $this;
     }

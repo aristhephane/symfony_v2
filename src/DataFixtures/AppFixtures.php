@@ -367,7 +367,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($film);
             echo "Film " . $film->getTitle() . " créé et persisté.\n";
-            /*
+
             // Film
             $items = [];
             for ($i = 0; $i < 3; $i++) {
@@ -382,19 +382,40 @@ class AppFixtures extends Fixture
                 $items[] = $dvd; // Ajouter les DVDs à la liste des items
             }
 
-            $customer = new Customer();
-            $customer->setFirstName('John');
-            $customer->setLastName('Doe');
-            $customer->setEmail('john.doe@example.com');
-            $customer->setAddress('123 Main St');
-            $customer->setPhoneNumber('555-1234');
-            $manager->persist($customer);
+            $customersData = [
+                ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'john.doe@example.com', 'address' => '123 Main St', 'phoneNumber' => '555-1234'],
+                ['firstName' => 'Jane', 'lastName' => 'Smith', 'email' => 'jane.smith@example.com', 'address' => '124 Main St', 'phoneNumber' => '555-5678'],
+                ['firstName' => 'Michael', 'lastName' => 'Johnson', 'email' => 'michael.johnson@example.com', 'address' => '125 Main St', 'phoneNumber' => '555-8765'],
+                ['firstName' => 'Emily', 'lastName' => 'Davis', 'email' => 'emily.davis@example.com', 'address' => '126 Main St', 'phoneNumber' => '555-4321'],
+                ['firstName' => 'James', 'lastName' => 'Brown', 'email' => 'james.brown@example.com', 'address' => '127 Main St', 'phoneNumber' => '555-6789'],
+                ['firstName' => 'Patricia', 'lastName' => 'Jones', 'email' => 'patricia.jones@example.com', 'address' => '128 Main St', 'phoneNumber' => '555-9876'],
+                ['firstName' => 'Robert', 'lastName' => 'Garcia', 'email' => 'robert.garcia@example.com', 'address' => '129 Main St', 'phoneNumber' => '555-3456'],
+                ['firstName' => 'Linda', 'lastName' => 'Martinez', 'email' => 'linda.martinez@example.com', 'address' => '130 Main St', 'phoneNumber' => '555-6543'],
+                ['firstName' => 'David', 'lastName' => 'Rodriguez', 'email' => 'david.rodriguez@example.com', 'address' => '131 Main St', 'phoneNumber' => '555-7890'],
+                ['firstName' => 'Barbara', 'lastName' => 'Martinez', 'email' => 'barbara.martinez@example.com', 'address' => '132 Main St', 'phoneNumber' => '555-2109'],
+                ['firstName' => 'Charles', 'lastName' => 'Hernandez', 'email' => 'charles.hernandez@example.com', 'address' => '133 Main St', 'phoneNumber' => '555-5432'],
+                ['firstName' => 'Elizabeth', 'lastName' => 'Lopez', 'email' => 'elizabeth.lopez@example.com', 'address' => '134 Main St', 'phoneNumber' => '555-6547'],
+                ['firstName' => 'Joseph', 'lastName' => 'Gonzalez', 'email' => 'joseph.gonzalez@example.com', 'address' => '135 Main St', 'phoneNumber' => '555-7634'],
+                ['firstName' => 'Susan', 'lastName' => 'Wilson', 'email' => 'susan.wilson@example.com', 'address' => '136 Main St', 'phoneNumber' => '555-8732'],
+            ];
+
+            foreach ($customersData as $data) {
+                $customer = new Customer();
+                $customer->setFirstName($data['firstName']);
+                $customer->setLastName($data['lastName']);
+                $customer->setEmail($data['email']);
+                $customer->setAddress($data['address']);
+                $customer->setPhoneNumber($data['phoneNumber']);
+                $manager->persist($customer);
+            }
+
+            $manager->flush();
 
             $order = new Order();
             $order->setOrderDate(new \DateTime());
             $order->setStatus(Order::STATUS_PENDING);
             $order->setCustomerId($customer);
-            $order->setItems($items); // Utiliser l'array des items ici
+            $order->setItems($items);
             $order->setTotalPrice(19.99);
             $manager->persist($order);
 
@@ -404,7 +425,6 @@ class AppFixtures extends Fixture
             $user->setPassword(password_hash('password', PASSWORD_BCRYPT));
             $user->setRoles([User::ROLE_ADMIN]);
             $manager->persist($user);
-    */
         }
         $manager->flush();
         echo "Films créés et persistés.\n";

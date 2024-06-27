@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ dvd.title }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ dvd.title }}</h1>
+	<p>{{ dvd.description }}</p>
+	<ul>
+		<li>Annee d'apparution:
+			{{ dvd.releaseYear }}</li>
+		<li>Duree:
+			{{ dvd.runtime }}
+			minutes</li>
+		<li>Realisateur:
+			{{ dvd.director }}</li>
+		<li>Maison de production:
+			{{ dvd.studio }}</li>
+	</ul>
+	<h2>Genres</h2>
+	<ul>
+		{% for genre in dvd.genres %}
+			<li>{{ genre.name }}</li>
+		{% endfor %}
+	</ul>
+	<h2>Acteurs</h2>
+	<ul>
+		{% for actor in dvd.actors %}
+			<li>{{ actor }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

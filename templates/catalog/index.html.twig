@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalog
+{% endblock %}
+
+{% block body %}
+	<h1>Catalogue de DVD</h1>
+	<div class="catalog">
+		{% for dvd in dvds %}
+			<div class="dvd">
+				<h2>{{ dvd.title }}</h2>
+				<p>{{ dvd.description }}</p>
+				<a href="{{ path('dvd_show', {id: dvd.id}) }}">Afficher les
+					<details></details>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

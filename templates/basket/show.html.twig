@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Basket
+{% endblock %}
+
+{% block body %}
+	<h1>Mon Panier</h1>
+	<div class="basket">
+		{% for item in basket.items %}
+			<div class="item">
+				<h2>{{ item.dvd.title }}</h2>
+				<p>{{ item.dvd.description }}</p>
+				<p>Quantite:
+					{{ item.quantity }}</p>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="total">
+		<h2>Total:
+			{{ basket.total }}</h2>
+	</div>
+	<a href="{{ path('checkout') }}" class="btn">Valider Paiement</a>
+{% endblock %}

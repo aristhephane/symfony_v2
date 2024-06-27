@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search
+{% endblock %}
+
+{% block body %}
+	<h1>Resultats des Recherches</h1>
+	<div class="search-results">
+		{% if dvds is empty %}
+			<p>Aucun DVD correspond trouve "{{ query }}".</p>
+		{% else %}
+			{% for dvd in dvds %}
+				<div class="dvd">
+					<h2>{{ dvd.title }}</h2>
+					<p>{{ dvd.description }}</p>
+					<a href="{{ path('dvd_show', {id: dvd.id}) }}">Afficher les details</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}

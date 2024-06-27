@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+{% endblock %}
+
+{% block body %}
+	<h1>Bienvenue sur notre site de Location de DVD en ligne</h1>
+	<div class="promotions">
+		<h2>Promotions</h2>
+		{% for promotion in promotions %}
+			<div class="promotion">
+				<p>{{ promotion }}</p>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="new-releases">
+		<h2>Nouvautes</h2>
+		{% for release in newReleases %}
+			<div class="release">
+				<p>{{ release }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
