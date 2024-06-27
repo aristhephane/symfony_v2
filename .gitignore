@@ -43,10 +43,10 @@
 /build/
 
 # Composer PHAR
-/composer.phar
+#/composer.phar
 
 # Backup entities generated with doctrine:generate:entities command
-**/Entity/*~
+#**/Entity/*~
 
 # Embedded web-server pid file
 /.web-server-pid
