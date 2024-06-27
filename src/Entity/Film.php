@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
 class Film
 {
-
     public const GENRE_SCI_FI = 'Sci-Fi';
     public const GENRE_THRILLER = 'Thriller';
     public const GENRE_COMEDY = 'Comedy';
@@ -40,15 +39,13 @@ class Film
     #[ORM\Column(length: 255)]
     private ?string $studio = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $genres = [];
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'films')]
+    #[ORM\JoinTable(name: 'film_genre')]
+    private Collection $genres;
 
     #[ORM\Column(type: Types::ARRAY)]
     private array $actors = [];
 
-    /**
-     * @var Collection<int, DVD>
-     */
     #[ORM\OneToMany(targetEntity: DVD::class, mappedBy: 'film')]
     private Collection $dvds;
 
@@ -59,17 +56,16 @@ class Film
         ?int $runtime = null,
         ?string $director = null,
         ?string $studio = null,
-        array $genres = [],
         array $actors = []
     ) {
         $this->dvds = new ArrayCollection();
+        $this->genres = new ArrayCollection();
         $this->title = $title;
         $this->description = $description;
         $this->releaseYear = $releaseYear;
         $this->runtime = $runtime;
         $this->director = $director;
         $this->studio = $studio;
-        $this->genres = $genres;
         $this->actors = $actors;
     }
 
@@ -157,14 +153,29 @@ class Film
         return $this;
     }
 
-    public function getGenres(): array
+    /**
+     * @return Collection<int, Genre>
+     */
+    public function getGenres(): Collection
     {
         return $this->genres;
     }
 
-    public function setGenres(array $genres): static
+    public function addGenre(Genre $genre): static
     {
-        $this->genres = $genres;
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+            $genre->addFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): static
+    {
+        if ($this->genres->removeElement($genre)) {
+            $genre->removeFilm($this);
+        }
 
         return $this;
     }

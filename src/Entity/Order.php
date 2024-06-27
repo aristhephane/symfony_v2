@@ -44,17 +44,10 @@ class Order
     #[ORM\ManyToMany(targetEntity: DVD::class, inversedBy: 'orders')]
     private Collection $dvd;
 
-    public function __construct(
-        ?\DateTimeInterface $orderDate = null,
-        ?string $status = null,
-        ?Customer $customer = null,
-        float $totalPrice = 0.0
-    ) {
-        $this->items = new ArrayCollection();
-        $this->orderDate = $orderDate;
-        $this->status = $status;
-        $this->customerId = $customer;
-        $this->totalPrice = $totalPrice;
+    public function __construct()
+    {
+        $this->items = [];
+        $this->dvd = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +104,13 @@ class Order
     public function getItems(): array
     {
         return $this->items;
+    }
+
+    public function addItem($item): static
+    {
+        $this->items[] = $item;
+
+        return $this;
     }
 
     public function setItems(array $items): static

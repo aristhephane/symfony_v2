@@ -9,20 +9,38 @@ use App\Entity\DVD;
 use App\Entity\Order;
 use App\Entity\User;
 use App\Entity\Customer;
+use App\Entity\Genre;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
         // Genre
+        $genreSciFi = new Genre();
+        $genreSciFi->setName('Sci-Fi');
+        $manager->persist($genreSciFi);
+
+        $genreThriller = new Genre();
+        $genreThriller->setName('Thriller');
+        $manager->persist($genreThriller);
+
+        $genreComedy = new Genre();
+        $genreComedy->setName('Comedy');
+        $manager->persist($genreComedy);
+
+        $genreAction = new Genre();
+        $genreAction->setName('Action');
+        $manager->persist($genreAction);
+
+        $manager->flush();
+
         $genres = [
-            Film::GENRE_SCI_FI,
-            Film::GENRE_THRILLER,
-            Film::GENRE_COMEDY,
-            Film::GENRE_ACTION,
+            'Sci-Fi' => $genreSciFi,
+            'Thriller' => $genreThriller,
+            'Comedy' => $genreComedy,
+            'Action' => $genreAction,
         ];
 
-        // Films
         $filmsData = [
             [
                 'title' => 'Inception',
@@ -31,7 +49,7 @@ class AppFixtures extends Fixture
                 'runtime' => 148,
                 'director' => 'Christopher Nolan',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_THRILLER],
+                'genres' => ['Sci-Fi', 'Thriller'],
                 'actors' => ['Leonardo DiCaprio', 'Joseph Gordon-Levitt'],
             ],
             [
@@ -41,7 +59,7 @@ class AppFixtures extends Fixture
                 'runtime' => 136,
                 'director' => 'The Wachowskis',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_ACTION],
+                'genres' => ['Sci-Fi', 'Action'],
                 'actors' => ['Keanu Reeves', 'Laurence Fishburne'],
             ],
             [
@@ -51,7 +69,7 @@ class AppFixtures extends Fixture
                 'runtime' => 121,
                 'director' => 'George Lucas',
                 'studio' => '20th Century Fox',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_ACTION],
+                'genres' => ['Sci-Fi', 'Action'],
                 'actors' => ['Mark Hamill', 'Harrison Ford'],
             ],
             [
@@ -61,7 +79,7 @@ class AppFixtures extends Fixture
                 'runtime' => 178,
                 'director' => 'Peter Jackson',
                 'studio' => 'New Line Cinema',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_ACTION],
+                'genres' => ['Sci-Fi', 'Action'],
                 'actors' => ['Elijah Wood', 'Ian McKellen'],
             ],
             [
@@ -71,7 +89,7 @@ class AppFixtures extends Fixture
                 'runtime' => 139,
                 'director' => 'David Fincher',
                 'studio' => '20th Century Fox',
-                'genres' => [Film::GENRE_THRILLER, Film::GENRE_ACTION],
+                'genres' => ['Thriller', 'Action'],
                 'actors' => ['Brad Pitt', 'Edward Norton'],
             ],
             [
@@ -81,7 +99,7 @@ class AppFixtures extends Fixture
                 'runtime' => 162,
                 'director' => 'James Cameron',
                 'studio' => '20th Century Fox',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_ACTION],
+                'genres' => ['Sci-Fi', 'Action'],
                 'actors' => ['Sam Worthington', 'Zoe Saldana'],
             ],
             [
@@ -91,7 +109,7 @@ class AppFixtures extends Fixture
                 'runtime' => 88,
                 'director' => 'Roger Allers, Rob Minkoff',
                 'studio' => 'Walt Disney Pictures',
-                'genres' => [Film::GENRE_COMEDY],
+                'genres' => ['Comedy'],
                 'actors' => ['Matthew Broderick', 'Jeremy Irons'],
             ],
             [
@@ -101,7 +119,7 @@ class AppFixtures extends Fixture
                 'runtime' => 116,
                 'director' => 'Robert Zemeckis',
                 'studio' => 'Universal Pictures',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_COMEDY],
+                'genres' => ['Sci-Fi', 'Comedy'],
                 'actors' => ['Michael J. Fox', 'Christopher Lloyd'],
             ],
             [
@@ -111,7 +129,7 @@ class AppFixtures extends Fixture
                 'runtime' => 127,
                 'director' => 'Steven Spielberg',
                 'studio' => 'Universal Pictures',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_THRILLER],
+                'genres' => ['Sci-Fi', 'Thriller'],
                 'actors' => ['Sam Neill', 'Laura Dern'],
             ],
             [
@@ -121,7 +139,7 @@ class AppFixtures extends Fixture
                 'runtime' => 143,
                 'director' => 'Joss Whedon',
                 'studio' => 'Marvel Studios',
-                'genres' => [Film::GENRE_ACTION, Film::GENRE_SCI_FI],
+                'genres' => ['Action', 'Sci-Fi'],
                 'actors' => ['Robert Downey Jr.', 'Chris Evans'],
             ],
             [
@@ -131,7 +149,7 @@ class AppFixtures extends Fixture
                 'runtime' => 118,
                 'director' => 'Jonathan Demme',
                 'studio' => 'Orion Pictures',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Jodie Foster', 'Anthony Hopkins'],
             ],
             [
@@ -141,7 +159,7 @@ class AppFixtures extends Fixture
                 'runtime' => 195,
                 'director' => 'Steven Spielberg',
                 'studio' => 'Universal Pictures',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Liam Neeson', 'Ben Kingsley'],
             ],
             [
@@ -151,7 +169,7 @@ class AppFixtures extends Fixture
                 'runtime' => 169,
                 'director' => 'Steven Spielberg',
                 'studio' => 'DreamWorks Pictures',
-                'genres' => [Film::GENRE_THRILLER, Film::GENRE_ACTION],
+                'genres' => ['Thriller', 'Action'],
                 'actors' => ['Tom Hanks', 'Matt Damon'],
             ],
             [
@@ -161,7 +179,7 @@ class AppFixtures extends Fixture
                 'runtime' => 130,
                 'director' => 'Christopher Nolan',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Christian Bale', 'Hugh Jackman'],
             ],
             [
@@ -171,7 +189,7 @@ class AppFixtures extends Fixture
                 'runtime' => 151,
                 'director' => 'Martin Scorsese',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Leonardo DiCaprio', 'Matt Damon'],
             ],
             [
@@ -181,7 +199,7 @@ class AppFixtures extends Fixture
                 'runtime' => 178,
                 'director' => 'Mel Gibson',
                 'studio' => '20th Century Fox',
-                'genres' => [Film::GENRE_ACTION],
+                'genres' => ['Action'],
                 'actors' => ['Mel Gibson', 'Sophie Marceau'],
             ],
             [
@@ -191,7 +209,7 @@ class AppFixtures extends Fixture
                 'runtime' => 155,
                 'director' => 'Ridley Scott',
                 'studio' => 'DreamWorks Pictures',
-                'genres' => [Film::GENRE_ACTION],
+                'genres' => ['Action'],
                 'actors' => ['Russell Crowe', 'Joaquin Phoenix'],
             ],
             [
@@ -201,7 +219,7 @@ class AppFixtures extends Fixture
                 'runtime' => 146,
                 'director' => 'Martin Scorsese',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Robert De Niro', 'Ray Liotta'],
             ],
             [
@@ -211,7 +229,7 @@ class AppFixtures extends Fixture
                 'runtime' => 127,
                 'director' => 'David Fincher',
                 'studio' => 'New Line Cinema',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Morgan Freeman', 'Brad Pitt'],
             ],
             [
@@ -221,7 +239,7 @@ class AppFixtures extends Fixture
                 'runtime' => 189,
                 'director' => 'Frank Darabont',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Tom Hanks', 'Michael Clarke Duncan'],
             ],
             [
@@ -231,7 +249,7 @@ class AppFixtures extends Fixture
                 'runtime' => 165,
                 'director' => 'Quentin Tarantino',
                 'studio' => 'The Weinstein Company',
-                'genres' => [Film::GENRE_ACTION, Film::GENRE_COMEDY],
+                'genres' => ['Action', 'Comedy'],
                 'actors' => ['Jamie Foxx', 'Christoph Waltz'],
             ],
             [
@@ -241,7 +259,7 @@ class AppFixtures extends Fixture
                 'runtime' => 120,
                 'director' => 'George Miller',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_ACTION, Film::GENRE_SCI_FI],
+                'genres' => ['Action', 'Sci-Fi'],
                 'actors' => ['Tom Hardy', 'Charlize Theron'],
             ],
             [
@@ -251,7 +269,7 @@ class AppFixtures extends Fixture
                 'runtime' => 175,
                 'director' => 'Francis Ford Coppola',
                 'studio' => 'Paramount Pictures',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Marlon Brando', 'Al Pacino'],
             ],
             [
@@ -261,7 +279,7 @@ class AppFixtures extends Fixture
                 'runtime' => 154,
                 'director' => 'Quentin Tarantino',
                 'studio' => 'Miramax',
-                'genres' => [Film::GENRE_THRILLER, Film::GENRE_COMEDY],
+                'genres' => ['Thriller', 'Comedy'],
                 'actors' => ['John Travolta', 'Uma Thurman'],
             ],
             [
@@ -271,7 +289,7 @@ class AppFixtures extends Fixture
                 'runtime' => 152,
                 'director' => 'Christopher Nolan',
                 'studio' => 'Warner Bros',
-                'genres' => [Film::GENRE_ACTION, Film::GENRE_THRILLER],
+                'genres' => ['Action', 'Thriller'],
                 'actors' => ['Christian Bale', 'Heath Ledger'],
             ],
             [
@@ -281,7 +299,7 @@ class AppFixtures extends Fixture
                 'runtime' => 142,
                 'director' => 'Robert Zemeckis',
                 'studio' => 'Paramount Pictures',
-                'genres' => [Film::GENRE_COMEDY],
+                'genres' => ['Comedy'],
                 'actors' => ['Tom Hanks', 'Robin Wright'],
             ],
             [
@@ -291,7 +309,7 @@ class AppFixtures extends Fixture
                 'runtime' => 169,
                 'director' => 'Christopher Nolan',
                 'studio' => 'Paramount Pictures',
-                'genres' => [Film::GENRE_SCI_FI, Film::GENRE_THRILLER],
+                'genres' => ['Sci-Fi', 'Thriller'],
                 'actors' => ['Matthew McConaughey', 'Anne Hathaway'],
             ],
             [
@@ -301,7 +319,7 @@ class AppFixtures extends Fixture
                 'runtime' => 155,
                 'director' => 'Ridley Scott',
                 'studio' => 'DreamWorks',
-                'genres' => [Film::GENRE_ACTION],
+                'genres' => ['Action'],
                 'actors' => ['Russell Crowe', 'Joaquin Phoenix'],
             ],
             [
@@ -311,7 +329,7 @@ class AppFixtures extends Fixture
                 'runtime' => 195,
                 'director' => 'James Cameron',
                 'studio' => '20th Century Fox',
-                'genres' => [Film::GENRE_THRILLER, Film::GENRE_COMEDY],
+                'genres' => ['Thriller', 'Comedy'],
                 'actors' => ['Leonardo DiCaprio', 'Kate Winslet'],
             ],
             [
@@ -321,7 +339,7 @@ class AppFixtures extends Fixture
                 'runtime' => 142,
                 'director' => 'Frank Darabont',
                 'studio' => 'Castle Rock Entertainment',
-                'genres' => [Film::GENRE_THRILLER],
+                'genres' => ['Thriller'],
                 'actors' => ['Tim Robbins', 'Morgan Freeman'],
             ],
         ];
@@ -334,12 +352,23 @@ class AppFixtures extends Fixture
                 $filmData['runtime'],
                 $filmData['director'],
                 $filmData['studio'],
-                $filmData['genres'],
                 $filmData['actors']
             );
+            /*
+            // Associer les genres au film après la création
+
+            foreach ($filmData['genres'] as $genreName) {
+                if (isset($genres[$genreName])) {
+                    $film->addGenre($genres[$genreName]);
+                } else {
+                    throw new \Exception("Genre not found: $genreName");
+                }
+            }
+
             $manager->persist($film);
 
             // Film
+            $items = [];
             for ($i = 0; $i < 3; $i++) {
                 $dvd = new DVD(
                     $film,
@@ -349,7 +378,9 @@ class AppFixtures extends Fixture
                     'poster_' . $i . '.jpg'
                 );
                 $manager->persist($dvd);
+                $items[] = $dvd; // Ajouter les DVDs à la liste des items
             }
+
             $customer = new Customer();
             $customer->setFirstName('John');
             $customer->setLastName('Doe');
@@ -362,9 +393,7 @@ class AppFixtures extends Fixture
             $order->setOrderDate(new \DateTime());
             $order->setStatus(Order::STATUS_PENDING);
             $order->setCustomerId($customer);
-            foreach ($items as $item) {
-                $order->addItem($item);
-            }
+            $order->setItems($items); // Utiliser l'array des items ici
             $order->setTotalPrice(19.99);
             $manager->persist($order);
 
@@ -374,10 +403,8 @@ class AppFixtures extends Fixture
             $user->setPassword(password_hash('password', PASSWORD_BCRYPT));
             $user->setRoles([User::ROLE_ADMIN]);
             $manager->persist($user);
-
-            $manager->flush();
+    */
         }
-
         $manager->flush();
     }
 }

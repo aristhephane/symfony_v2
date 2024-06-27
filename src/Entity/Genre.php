@@ -19,14 +19,14 @@ class Genre
     private ?string $name = null;
 
     /**
-     * @var Collection<int, DVD>
+     * @var Collection<int, Film>
      */
-    #[ORM\OneToMany(targetEntity: DVD::class, mappedBy: 'genre')]
-    private Collection $dvd;
+    #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'genres')]
+    private Collection $films;
 
     public function __construct()
     {
-        $this->dvd = new ArrayCollection();
+        $this->films = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,30 +54,27 @@ class Genre
     }
 
     /**
-     * @return Collection<int, DVD>
+     * @return Collection<int, Film>
      */
-    public function getDvd(): Collection
+    public function getFilms(): Collection
     {
-        return $this->dvd;
+        return $this->films;
     }
 
-    public function addDvd(DVD $dvd): static
+    public function addFilm(Film $film): static
     {
-        if (!$this->dvd->contains($dvd)) {
-            $this->dvd->add($dvd);
-            $dvd->setGenre($this);
+        if (!$this->films->contains($film)) {
+            $this->films->add($film);
+            $film->addGenre($this);
         }
 
         return $this;
     }
 
-    public function removeDvd(DVD $dvd): static
+    public function removeFilm(Film $film): static
     {
-        if ($this->dvd->removeElement($dvd)) {
-            // set the owning side to null (unless already changed)
-            if ($dvd->getGenre() === $this) {
-                $dvd->setGenre(null);
-            }
+        if ($this->films->removeElement($film)) {
+            $film->removeGenre($this);
         }
 
         return $this;
