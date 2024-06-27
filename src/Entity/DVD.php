@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DVDRepository::class)]
 class DVD
 {
+
+    public const FORMAT_BLURAY = 'Blu-ray';
+    public const FORMAT_DVD = 'DVD';
+    public const FORMAT_4K = '4K';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -47,10 +52,18 @@ class DVD
     #[ORM\JoinColumn(nullable: false)]
     private ?Genre $genre = null;
 
-    public function __construct()
-    {
-        $this->reviews = new ArrayCollection();
-        $this->orders = new ArrayCollection();
+    public function __construct(
+        ?Film $film = null,
+        ?string $format = null,
+        ?float $price = null,
+        ?int $stock = null,
+        ?string $poster = null
+    ) {
+        $this->film = $film;
+        $this->format = $format;
+        $this->price = $price;
+        $this->stock = $stock;
+        $this->poster = $poster;
     }
 
     public function getId(): ?int
@@ -84,6 +97,9 @@ class DVD
 
     public function setFormat(string $format): static
     {
+        if (!in_array($format, [self::FORMAT_BLURAY, self::FORMAT_DVD, self::FORMAT_4K])) {
+            throw new \InvalidArgumentException("Invalid format");
+        }
         $this->format = $format;
 
         return $this;

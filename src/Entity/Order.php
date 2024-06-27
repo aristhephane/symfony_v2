@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: '`order`')]
 class Order
 {
+
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_SHIPPED = 'shipped';
+    public const STATUS_RETURNED = 'returned';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -39,9 +44,17 @@ class Order
     #[ORM\ManyToMany(targetEntity: DVD::class, inversedBy: 'orders')]
     private Collection $dvd;
 
-    public function __construct()
-    {
-        $this->dvd = new ArrayCollection();
+    public function __construct(
+        ?\DateTimeInterface $orderDate = null,
+        ?string $status = null,
+        ?Customer $customer = null,
+        float $totalPrice = 0.0
+    ) {
+        $this->items = new ArrayCollection();
+        $this->orderDate = $orderDate;
+        $this->status = $status;
+        $this->customerId = $customer;
+        $this->totalPrice = $totalPrice;
     }
 
     public function getId(): ?int
@@ -75,6 +88,9 @@ class Order
 
     public function setStatus(string $status): static
     {
+        if (!in_array($status, [self::STATUS_PENDING, self::STATUS_SHIPPED, self::STATUS_RETURNED])) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
         $this->status = $status;
 
         return $this;

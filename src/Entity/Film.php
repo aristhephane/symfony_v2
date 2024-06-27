@@ -11,6 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
 class Film
 {
+
+    public const GENRE_SCI_FI = 'Sci-Fi';
+    public const GENRE_THRILLER = 'Thriller';
+    public const GENRE_COMEDY = 'Comedy';
+    public const GENRE_ACTION = 'Action';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -46,9 +52,25 @@ class Film
     #[ORM\OneToMany(targetEntity: DVD::class, mappedBy: 'film')]
     private Collection $dvds;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?string $title = null,
+        ?string $description = null,
+        ?int $releaseYear = null,
+        ?int $runtime = null,
+        ?string $director = null,
+        ?string $studio = null,
+        array $genres = [],
+        array $actors = []
+    ) {
         $this->dvds = new ArrayCollection();
+        $this->title = $title;
+        $this->description = $description;
+        $this->releaseYear = $releaseYear;
+        $this->runtime = $runtime;
+        $this->director = $director;
+        $this->studio = $studio;
+        $this->genres = $genres;
+        $this->actors = $actors;
     }
 
     public function getId(): ?int

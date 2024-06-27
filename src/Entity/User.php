@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
+
+    public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -22,6 +26,16 @@ class User
 
     #[ORM\Column(type: Types::ARRAY)]
     private array $roles = [];
+
+    public function __construct(
+        ?string $username = null,
+        ?string $password = null,
+        array $roles = [self::ROLE_USER]
+    ) {
+        $this->username = $username;
+        $this->password = $password;
+        $this->roles = $roles;
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +76,9 @@ class User
     public function getRoles(): array
     {
         return $this->roles;
+        $roles[] = self::ROLE_USER;
+
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
