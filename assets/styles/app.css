@@ -1,3 +1,196 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
 body {
-    background-color: skyblue;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+/* Home Page */
+.home {
+    text-align: center;
+}
+
+.home h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.home .promotions,
+.home .new-releases {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.home .promotions .card,
+.home .new-releases .card {
+    flex: 1 1 30%;
+    margin: 10px;
+}
+
+/* Catalog Page */
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.catalog .card {
+    flex: 1 1 22%;
+    margin: 10px;
+}
+
+/* Account Page */
+.account h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.account .orders {
+    list-style: none;
+    padding: 0;
+}
+
+.account .orders li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Basket Page */
+.basket h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.basket .items {
+    list-style: none;
+    padding: 0;
+}
+
+.basket .items li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.basket .total {
+    text-align: right;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* Checkout Page */
+.checkout h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.checkout form {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout form .form-group {
+    margin-bottom: 15px;
+}
+
+.checkout form .form-group label {
+    font-weight: bold;
+}
+
+.checkout form .form-group input,
+.checkout form .form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.checkout form button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout form button:hover {
+    background-color: #555;
 }

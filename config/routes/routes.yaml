@@ -1,0 +1,15 @@
+index:
+    path: /
+    controller: App\Controller\MainController::home
+
+catalog:
+    path: /catalog
+    controller: App\Controller\CatalogController::index
+
+account:
+    path: /account
+    controller: App\Controller\AccountController::index
+
+basket:
+    path: /basket
+    controller: App\Controller\BasketController::index
