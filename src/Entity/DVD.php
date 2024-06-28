@@ -35,30 +35,34 @@ class DVD
     #[ORM\Column(length: 255)]
     private ?string $poster = null;
 
-    /**
-     * @var Collection<int, Review>
-     */
+    #[ORM\Column(type: 'integer')]
+    private ?int $releaseYear = null;
+
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'dvdId')]
     private Collection $reviews;
 
-    /**
-     * @var Collection<int, Order>
-     */
     #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'dvd')]
     private Collection $orders;
+
+    /*#[ORM\ManyToOne(inversedBy: 'dvd')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Genre $genre = null;
+    */
 
     public function __construct(
         ?Film $film = null,
         ?string $format = null,
         ?float $price = null,
         ?int $stock = null,
-        ?string $poster = null
+        ?string $poster = null,
+        ?int $releaseYear = null
     ) {
         $this->film = $film;
         $this->format = $format;
         $this->price = $price;
         $this->stock = $stock;
         $this->poster = $poster;
+        $this->releaseYear = $releaseYear;
         $this->reviews = new ArrayCollection();
         $this->orders = new ArrayCollection();
     }
@@ -71,7 +75,6 @@ class DVD
     public function setId(int $id): static
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -83,7 +86,6 @@ class DVD
     public function setFilm(?Film $film): static
     {
         $this->film = $film;
-
         return $this;
     }
 
@@ -98,7 +100,6 @@ class DVD
             throw new \InvalidArgumentException("Invalid format");
         }
         $this->format = $format;
-
         return $this;
     }
 
@@ -110,7 +111,6 @@ class DVD
     public function setPrice(float $price): static
     {
         $this->price = $price;
-
         return $this;
     }
 
@@ -122,7 +122,6 @@ class DVD
     public function setStock(int $stock): static
     {
         $this->stock = $stock;
-
         return $this;
     }
 
@@ -134,7 +133,17 @@ class DVD
     public function setPoster(string $poster): static
     {
         $this->poster = $poster;
+        return $this;
+    }
 
+    public function getReleaseYear(): ?int
+    {
+        return $this->releaseYear;
+    }
+
+    public function setReleaseYear(int $releaseYear): static
+    {
+        $this->releaseYear = $releaseYear;
         return $this;
     }
 
@@ -152,19 +161,16 @@ class DVD
             $this->reviews->add($review);
             $review->setDvdId($this);
         }
-
         return $this;
     }
 
     public function removeReview(Review $review): static
     {
         if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
             if ($review->getDvdId() === $this) {
                 $review->setDvdId(null);
             }
         }
-
         return $this;
     }
 
@@ -182,7 +188,6 @@ class DVD
             $this->orders->add($order);
             $order->addDvd($this);
         }
-
         return $this;
     }
 
@@ -191,7 +196,23 @@ class DVD
         if ($this->orders->removeElement($order)) {
             $order->removeDvd($this);
         }
-
         return $this;
+    }
+
+    /*
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?Genre $genre): static
+    {
+        $this->genre = $genre;
+        return $this;
+    }
+*/
+    public function __toString(): string
+    {
+        return $this->getFilm()->getTitle() . ' (' . $this->getFormat() . ')'; // Vous pouvez adapter cette représentation en string selon vos besoins
     }
 }

@@ -30,4 +30,25 @@ class MainController extends AbstractController
             'newReleases' => $newReleases,
         ]);
     }
+
+    #[Route('/catalog', name: 'catalog')]
+    public function catalog(): Response
+    {
+        $dvds = $this->dvdRepository->findAll();
+        return $this->render('catalog/index.html.twig', [
+            'dvds' => $dvds,
+        ]);
+    }
+
+    #[Route('/account', name: 'account')]
+    public function account(): Response
+    {
+        return $this->render('account/index.html.twig');
+    }
+
+    #[Route('/basket', name: 'basket')]
+    public function basket(): Response
+    {
+        return $this->render('basket/index.html.twig');
+    }
 }
