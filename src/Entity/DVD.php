@@ -213,6 +213,6 @@ class DVD
 */
     public function __toString(): string
     {
-        return $this->getFilm()->getTitle() . ' (' . $this->getFormat() . ')'; // Vous pouvez adapter cette représentation en string selon vos besoins
+        return $this->getFilm()->getTitle() . ' (' . $this->getFormat() . ')';
     }
 }

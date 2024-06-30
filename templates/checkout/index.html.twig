@@ -5,9 +5,7 @@
 
 {% block body %}
 	<h1>Paiement</h1>
-	<form
-		action="{{ path('checkout') }}" method="post">
-		<!-- Add form fields for shipping address, payment details, etc. -->
+	<form action="{{ path('checkout') }}" method="post">
 		<button type="submit" class="btn">Valider le paiement</button>
 	</form>
 {% endblock %}

@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // Genre
+
         $genreSciFi = new Genre();
         $genreSciFi->setName('Sci-Fi');
         $manager->persist($genreSciFi);
@@ -354,7 +354,6 @@ class AppFixtures extends Fixture
                 $filmData['studio'],
                 $filmData['actors']
             );
-            // Associer les genres au film après la création
 
             foreach ($filmData['genres'] as $genreName) {
                 if (isset($genres[$genreName])) {
@@ -368,7 +367,6 @@ class AppFixtures extends Fixture
             $manager->persist($film);
             echo "Film " . $film->getTitle() . " créé et persisté.\n";
 
-            // Film
             $items = [];
             for ($i = 0; $i < 3; $i++) {
                 $dvd = new DVD(
@@ -379,7 +377,7 @@ class AppFixtures extends Fixture
                     'poster_' . $i . '.jpg'
                 );
                 $manager->persist($dvd);
-                $items[] = $dvd; // Ajouter les DVDs à la liste des items
+                $items[] = $dvd;
             }
 
             $customersData = [
@@ -419,7 +417,6 @@ class AppFixtures extends Fixture
             $order->setTotalPrice(19.99);
             $manager->persist($order);
 
-            // Exemple d'utilisateur
             $user = new User();
             $user->setUsername('admin');
             $user->setPassword(password_hash('password', PASSWORD_BCRYPT));

@@ -7,11 +7,11 @@
 	<h1>Catalogue de DVD</h1>
 	<div class="catalog">
 		{% for dvd in dvds %}
-			 <div class="dvd">
-                <h2>{{ dvd.getFilm().getTitle() }}</h2> <!-- Accès au titre du film -->
-                <p>{{ dvd.getFilm().getDescription() }}</p> <!-- Accès à la description du film -->
-                <a href="{{ path('dvd_show', {id: dvd.id}) }}">Afficher les détails</a>
-            </div>
+			<div class="dvd">
+				<h2>{{ dvd.getFilm().getTitle() }}</h2>
+				<p>{{ dvd.getFilm().getDescription() }}</p>
+				<a href="{{ path('dvd_show', {id: dvd.id}) }}">Afficher les détails</a>
+			</div>
 		{% endfor %}
 	</div>
 {% endblock %}

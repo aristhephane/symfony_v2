@@ -11,9 +11,6 @@ class AdminReportController extends AbstractController
   #[Route('/admin/reports', name: 'admin_reports')]
   public function index(): Response
   {
-    // Fetch report data
-    return $this->render('admin/reports/index.html.twig', [
-      // Add necessary data here
-    ]);
+    return $this->render('admin/reports/index.html.twig', []);
   }
 }

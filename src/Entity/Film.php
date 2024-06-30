@@ -213,7 +213,6 @@ class Film
     public function removeDvd(DVD $dvd): static
     {
         if ($this->dvds->removeElement($dvd)) {
-            // set the owning side to null (unless already changed)
             if ($dvd->getFilm() === $this) {
                 $dvd->setFilm(null);
             }

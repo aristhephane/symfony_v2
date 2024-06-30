@@ -27,7 +27,7 @@ class AdminCustomerController extends AbstractController
   #[Route('/admin/customers/edit/{id}', name: 'admin_customer_edit')]
   public function edit(int $id): Response
   {
-    // Logique pour éditer un client
+
     return $this->render('admin/customers/edit.html.twig', [
       'customerId' => $id,
     ]);

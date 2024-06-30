@@ -19,9 +19,9 @@ class CheckoutService
     $order = new Order();
     $order->setOrderDate(new \DateTime());
     $order->setStatus(Order::STATUS_PENDING);
-    $order->setTotalPrice(19.99); // Example value
+    $order->setTotalPrice(19.99); // Exemple
 
-    // Persist the order
+    // Persistance
     $this->entityManager->persist($order);
     $this->entityManager->flush();
 

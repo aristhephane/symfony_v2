@@ -141,7 +141,6 @@ class Customer
     public function removeOrder(Order $order): static
     {
         if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
             if ($order->getCustomerId() === $this) {
                 $order->setCustomerId(null);
             }
@@ -171,7 +170,6 @@ class Customer
     public function removeReview(Review $review): static
     {
         if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
             if ($review->getCustomerId() === $this) {
                 $review->setCustomerId(null);
             }
