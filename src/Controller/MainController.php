@@ -45,10 +45,11 @@ class MainController extends AbstractController
     {
         return $this->render('account/index.html.twig');
     }
-
+    /*
     #[Route('/basket', name: 'basket')]
     public function basket(): Response
     {
         return $this->render('basket/index.html.twig');
     }
+*/
 }

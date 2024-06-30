@@ -21,7 +21,7 @@ class BasketController extends AbstractController
   {
     $basket = $this->basketService->getBasket();
 
-    return $this->render('basket/show.html.twig', [
+    return $this->render('basket/index.html.twig', [
       'basket' => $basket,
     ]);
   }

@@ -8,9 +8,9 @@
 	<div class="basket">
 		{% for item in basket.items %}
 			<div class="item">
-				<h2>{{ item.dvd.title }}</h2>
-				<p>{{ item.dvd.description }}</p>
-				<p>Quantite:
+				<h2>{{ item.dvd.getFilm().getTitle() }}</h2>
+				<p>{{ item.dvd.getFilm().getDescription() }}</p>
+				<p>Quantité:
 					{{ item.quantity }}</p>
 			</div>
 		{% endfor %}
